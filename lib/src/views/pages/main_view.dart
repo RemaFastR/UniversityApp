@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:university_app/src/bll/models/category.dart';
+import 'package:university_app/src/bll/models/ientity.dart';
+import 'package:university_app/src/bll/models/profession.dart';
+import 'package:university_app/src/views/utils/custom_list_view.dart';
 
 class MainView extends StatelessWidget {
   @override
@@ -16,9 +20,8 @@ class MainView extends StatelessWidget {
               width: screenWidth,
               heigth: screenHeigth,
             )),
-            CategoriesWidget(
-              heigth: screenHeigth,
-            )
+            CategoriesWidget(heigth: screenHeigth, width: screenWidth),
+            ProfessionsWidget(heigth: screenHeigth, width: screenWidth)
           ],
         ),
       ),
@@ -76,27 +79,80 @@ class HeaderWidget extends StatelessWidget {
   }
 }
 
+List<IEntity> categories = [
+  new Category(name: 'BackEnd', image: 'lib/assets/images/test_img.png'),
+  new Category(name: 'FrontEnd', image: 'lib/assets/images/test_img.png'),
+  new Category(name: 'GameDev', image: 'lib/assets/images/test_img.png')
+];
+
 class CategoriesWidget extends StatelessWidget {
   double heigth;
+  double width;
 
-  CategoriesWidget({this.heigth});
+  CategoriesWidget({this.heigth, this.width});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(25),
-      alignment: Alignment.topLeft,
-      height: heigth / 3,
+      padding: EdgeInsets.all(10),
+      height: heigth / 3.7,
       child: Column(
         children: [
-          Text(
-            'категории профессий',
-            // устанавливаем стили: цвет текста, начертание (полужирное) и размер шрифта
-            style: TextStyle(
-                color: Colors.black87,
-                fontWeight: FontWeight.w500,
-                fontSize: 24),
+          Container(
+            alignment: Alignment.topLeft,
+            child: Text(
+              'категории профессий',
+              // устанавливаем стили: цвет текста, начертание (полужирное) и размер шрифта
+              style: TextStyle(
+                  color: Colors.black87,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 24),
+            ),
           ),
+          CustomListView(
+            itemWidth: width,
+            items: categories,
+          )
+        ],
+      ),
+    );
+  }
+}
+
+List<IEntity> professions = [
+  new Category(name: 'Java-developer', image: 'lib/assets/images/test_img.png'),
+  new Category(name: 'Game-designer', image: 'lib/assets/images/test_img.png'),
+  new Category(name: 'DataScientist', image: 'lib/assets/images/test_img.png')
+];
+
+class ProfessionsWidget extends StatelessWidget {
+  double heigth;
+  double width;
+
+  ProfessionsWidget({this.heigth, this.width});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      height: heigth / 3.7,
+      child: Column(
+        children: [
+          Container(
+            alignment: Alignment.topLeft,
+            child: Text(
+              'все профессии',
+              // устанавливаем стили: цвет текста, начертание (полужирное) и размер шрифта
+              style: TextStyle(
+                  color: Colors.black87,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 24),
+            ),
+          ),
+          CustomListView(
+            itemWidth: width,
+            items: professions,
+          )
         ],
       ),
     );
